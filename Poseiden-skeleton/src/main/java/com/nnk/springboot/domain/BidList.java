@@ -1,27 +1,25 @@
 package com.nnk.springboot.domain;
 
-import lombok.*;
-import org.springframework.beans.factory.annotation.Required;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.experimental.Accessors;
 
-import javax.persistence.*;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
-import java.sql.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.sql.Timestamp;
 
+@Data
+@Accessors(chain = true)
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
 @Entity
 @Table(name = "bidlist")
-@Getter
-@Setter
-@NoArgsConstructor
-@ToString
-@EqualsAndHashCode
-public class BidList {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private int id;
+public class BidList extends AbstractEntity {
 
+    @NonNull
     @Column(name = "account", nullable = false)
     private String account;
 

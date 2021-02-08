@@ -1,25 +1,22 @@
 package com.nnk.springboot.domain;
 
 import lombok.*;
+import lombok.experimental.Accessors;
+import net.bytebuddy.implementation.bind.annotation.SuperCall;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import java.sql.Time;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.sql.Timestamp;
 
 
+@Data
+@Accessors(chain = true)
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "trade")
-@Getter
-@Setter
-@NoArgsConstructor
-@ToString
-@EqualsAndHashCode
-public class Trade {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private int id;
+public class Trade extends AbstractEntity {
 
     @Column(name = "account", nullable = false)
     private String account;

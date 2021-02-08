@@ -12,6 +12,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.Assert.assertTrue;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TradeTests {
@@ -21,24 +23,24 @@ public class TradeTests {
 
 	@Test
 	public void tradeTest() {
-		Trade trade = new Trade("Trade Account", "Type");
+		Trade trade = new Trade();
 
 		// Save
 		trade = tradeRepository.save(trade);
-		Assert.assertNotNull(trade.getTradeId());
-		Assert.assertTrue(trade.getAccount().equals("Trade Account"));
+		Assert.assertNotNull(trade.getId());
+		Assert.assertEquals("Trade Account", trade.getAccount());
 
 		// Update
 		trade.setAccount("Trade Account Update");
 		trade = tradeRepository.save(trade);
-		Assert.assertTrue(trade.getAccount().equals("Trade Account Update"));
+		Assert.assertEquals("Trade Account Update", trade.getAccount());
 
 		// Find
 		List<Trade> listResult = tradeRepository.findAll();
-		Assert.assertTrue(listResult.size() > 0);
+		assertTrue(listResult.size() > 0);
 
 		// Delete
-		Integer id = trade.getTradeId();
+		Integer id = trade.getId();
 		tradeRepository.delete(trade);
 		Optional<Trade> tradeList = tradeRepository.findById(id);
 		Assert.assertFalse(tradeList.isPresent());

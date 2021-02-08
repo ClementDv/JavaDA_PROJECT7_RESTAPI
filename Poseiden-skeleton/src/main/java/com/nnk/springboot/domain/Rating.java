@@ -1,24 +1,20 @@
 package com.nnk.springboot.domain;
 
 import lombok.*;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
+@Data
+@Accessors(chain = true)
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
 @Entity
 @Table(name = "rating")
-@Getter
-@Setter
-@NoArgsConstructor
-@ToString
-@EqualsAndHashCode
-public class Rating {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private int id;
+public class Rating extends AbstractEntity {
 
     @Column(name = "moodysRating", nullable = false)
     private String moodysRating;

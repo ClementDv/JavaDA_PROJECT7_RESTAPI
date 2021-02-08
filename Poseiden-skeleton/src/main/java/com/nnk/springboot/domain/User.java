@@ -1,21 +1,20 @@
 package com.nnk.springboot.domain;
 
 import lombok.*;
+import lombok.experimental.Accessors;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+@Data
+@Accessors(chain = true)
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
 @Entity
 @Table(name = "users")
-@Getter
-@Setter
-@NoArgsConstructor
-@ToString
-@EqualsAndHashCode
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+public class User extends AbstractEntity{
 
     @Column(name = "username", nullable = false)
     @NotBlank(message = "Username is mandatory")
