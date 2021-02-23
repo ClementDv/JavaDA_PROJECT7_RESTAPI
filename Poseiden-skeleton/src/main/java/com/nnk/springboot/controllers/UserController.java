@@ -1,6 +1,6 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.User;
+import com.nnk.springboot.domain.entity.User;
 import com.nnk.springboot.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @Controller
+@RequestMapping("/poseidon")
 public class UserController {
     @Autowired
     private UserRepository userRepository;
@@ -38,7 +39,7 @@ public class UserController {
             user.setPassword(encoder.encode(user.getPassword()));
             userRepository.save(user);
             model.addAttribute("users", userRepository.findAll());
-            return "redirect:/user/list";
+            return "redirect:/poseidon/user/list";
         }
         return "user/add";
     }
@@ -63,7 +64,7 @@ public class UserController {
         user.setId(id);
         userRepository.save(user);
         model.addAttribute("users", userRepository.findAll());
-        return "redirect:/user/list";
+        return "redirect:/poseidon/user/list";
     }
 
     @GetMapping("/user/delete/{id}")
@@ -71,6 +72,6 @@ public class UserController {
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         userRepository.delete(user);
         model.addAttribute("users", userRepository.findAll());
-        return "redirect:/user/list";
+        return "redirect:/poseidon/user/list";
     }
 }

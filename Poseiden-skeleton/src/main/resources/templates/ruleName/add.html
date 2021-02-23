@@ -1,27 +1,60 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-	  xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8"/>
-<title>Home</title>
-<link rel="stylesheet" href="../../css/bootstrap.min.css" >
+    <meta charset="utf-8"/>
+    <title>Home</title>
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
 </head>
 <body>
-<div class="container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-md-offset-3">
 
-	<div class="row">
-		<h2>Add New Rule</h2>
-	</div>
-
-	<div class="row">
-		<form action="#" th:action="@{/ruleName/validate}" th:object="${ruleName}" method="post" class="form-horizontal" style="width: 100%">
-			<!--
-			TODO: Create a form to input the values of RuleName, there are 2 buttons: Save data and Cancel to the list RuleName
-			 -->
-
-		</form>
-	</div>
-
-</div>
+                <h1>Save Rule Name</h1>
+                <form th:action="@{/poseidon/ruleName/saveRuleName}" th:object="${ruleName}" th:method="post">
+                    <div class="form-group">
+                        <label class="control-label" for="name">Name</label>
+                        <input id="name" class="form-control" type="text"
+                               name="name" required/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="description">Description</label>
+                        <input id="description" class="form-control" type="text"
+                               name="description" required/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="json">Json</label>
+                        <input id="json" class="form-control" type="text"
+                               name="json" required/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="template">Template</label>
+                        <input id="template" class="form-control" type="text"
+                               name="template" required/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="sqlStr">SqlStr</label>
+                        <input id="sqlStr" class="form-control" type="text"
+                               name="sqlStr" required/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="sqlPart">SqlPart</label>
+                        <input id="sqlPart" class="form-control" type="text"
+                               name="sqlPart" required/>
+                    </div>
+                    <div class="form-group">
+                        <div class="row justify-content-center">
+                            <div class="col-sm-6 col<-sm-offset-3">
+                                <button type="submit" class="form-control btn btn-primary">
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

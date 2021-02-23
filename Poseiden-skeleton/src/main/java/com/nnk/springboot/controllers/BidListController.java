@@ -1,60 +1,66 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.domain.dto.BidListDto;
+import com.nnk.springboot.domain.entity.BidList;
+import com.nnk.springboot.domain.mapper.BidListMapper;
 import com.nnk.springboot.services.BidListService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Controller
+@RequestMapping("/poseidon")
 public class BidListController {
     private final BidListService service;
 
-    public BidListController(BidListService service) {
+    private BidListMapper bidListMapper;
+
+    public BidListController(BidListService service, BidListMapper bidListMapper) {
         this.service = service;
+        this.bidListMapper = bidListMapper;
     }
 
     @RequestMapping("/bidList/list")
-    public String home(Model model)
-    {
-        // TODO: call service find all bids to show to the view
+    public String home(Model model) {
+        model.addAttribute("bidList", service.getList());
         return "bidList/list";
     }
 
     @GetMapping("/bidList/add")
-    public String addBidForm(BidList bid) {
+    public String addBidForm(Model model) {
+        model.addAttribute("bidList", new BidListDto());
         return "bidList/add";
     }
 
-    @PostMapping("/bidList/validate")
-    public String validate(@Valid BidList bid, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return bid list
-        return "bidList/add";
+    @PostMapping("/bidList/saveBid")
+    public String validate(@ModelAttribute("bidList") @Valid BidListDto bidListDto) {
+        service.create(bidListDto);
+        return "redirect:/poseidon/bidList/list";
     }
 
-    @GetMapping("/bidList/update/{id}")
-    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get Bid by Id and to model then show to the form
+    @GetMapping("/bidList/updateBid")
+    public String showUpdateForm(@RequestParam Integer id, Model model) {
+        model.addAttribute("bidListToUpdate",
+                service.read(id));
+        model.addAttribute("bidListDto", new BidListDto());
         return "bidList/update";
     }
 
-    @PostMapping("/bidList/update/{id}")
-    public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList,
-                             BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Bid and return list Bid
-        return "redirect:/bidList/list";
+    @PutMapping("/bidList/updateBid")
+    public String updateBid(@RequestParam Integer id, @Valid @ModelAttribute BidListDto bidListDto) {
+        service.update(id, bidListDto);
+        return "redirect:/poseidon/bidList/list";
     }
 
-    @GetMapping("/bidList/delete/{id}")
-    public String deleteBid(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find Bid by Id and delete the bid, return to Bid list
-        return "redirect:/bidList/list";
+    @DeleteMapping("/bidList/deleteBid")
+    public String deleteBid(@RequestParam Integer id) {
+        service.deleteById(id);
+        return "redirect:/poseidon/bidList/list";
     }
 }

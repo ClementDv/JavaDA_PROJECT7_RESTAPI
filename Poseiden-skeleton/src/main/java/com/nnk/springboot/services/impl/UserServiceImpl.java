@@ -1,24 +1,25 @@
 package com.nnk.springboot.services.impl;
 
-import com.nnk.springboot.domain.User;
+import com.nnk.springboot.domain.dto.UserDto;
+import com.nnk.springboot.domain.entity.User;
+import com.nnk.springboot.domain.mapper.CoreMapper;
+import com.nnk.springboot.domain.mapper.UserMapper;
 import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.services.UserService;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+@RequiredArgsConstructor
 @Service
 @Transactional
-public class UserServiceImpl extends CoreServiceImpl<User, Integer> implements UserService {
+public class UserServiceImpl extends CoreServiceImpl<UserDto, User, Integer> implements UserService {
 
-    private final UserRepository repository;
+    private final @Getter
+    UserRepository repository;
 
-    public UserServiceImpl(UserRepository repository) {
-        this.repository = repository;
-    }
-
-    @Override
-    UserRepository getRepository() {
-        return repository;
-    }
+    private final @Getter
+    UserMapper mapper;
 }

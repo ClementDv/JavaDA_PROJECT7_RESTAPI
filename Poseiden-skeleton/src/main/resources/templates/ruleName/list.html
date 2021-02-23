@@ -10,37 +10,57 @@
 <div class="container">
 	<div class="row">
 		<div class="col-6">
-			<a href="/bidList/list">Bid List</a>&nbsp;|&nbsp;
-			<a href="/curvePoint/list">Curve Points</a>&nbsp;|&nbsp;
-			<a href="/rating/list">Ratings</a>&nbsp;|&nbsp;
-			<a href="/trade/list">Trade</a>&nbsp;|&nbsp;
-			<a href="/ruleName/list">Rule</a>
+			<a href="/poseidon/bidList/list">Bid List</a>&nbsp;|&nbsp;
+			<a href="/poseidon/curvePoint/list">Curve Points</a>&nbsp;|&nbsp;
+			<a href="/poseidon/rating/list">Ratings</a>&nbsp;|&nbsp;
+			<a href="/poseidon/trade/list">Trade</a>&nbsp;|&nbsp;
+			<a href="/poseidon/ruleName/list">Rule</a>
 		</div>
 		<div class="col-6 text-right">
 			Logged in user: <b th:inline="text"  class="user"> [[${#httpServletRequest.remoteUser}]] </b>
-			<form th:action="@{/app-logout}" method="POST">
+			<form th:action="@{/poseidon/logout}" method="POST">
 				<input type="submit" value="Logout"/>
 			</form>
 		</div>
 	</div>
 	<div class="row"><h2>Rule List</h2></div>
 	<div class="row">
-		<a href="/ruleName/add" class="btn btn-primary btn-sm">Add New</a>
+		<a href="/poseidon/ruleName/add" class="btn btn-primary btn-sm">Add New</a>
 		<table class="table table-bordered">
 			<thead>
 				<tr>
 					<th>Id</th>
 					<th>Name</th>
 					<th>Description</th>
-					<th>json</th>
-					<th>template</th>
-					<th>sql</th>
-					<th>sqlPart</th>
+					<th>Json</th>
+					<th>Template</th>
+					<th>Sql</th>
+					<th>SqlPart</th>
 					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
-			<!-- TODO: Show all RuleName to the table, the Action column will have Edit & Delete buttons -->
+			<tr th:each="ruleName : ${ruleNameList}">
+				<td th:text="${ruleName.id}"/>
+				<td th:text="${ruleName.name}"/>
+				<td th:text="${ruleName.description}"/>
+				<td th:text="${ruleName.json}"/>
+				<td th:text="${ruleName.template}"/>
+				<td th:text="${ruleName.sqlStr}"/>
+				<td th:text="${ruleName.sqlPart}"/>
+				<td>
+					<div class="btn-group">
+						<form th:action="@{/poseidon/ruleName/updateRuleName}" th:method="get">
+							<input type="hidden" name="id" th:value="${ruleName.id}"/>
+							<button type="submit" value="Get" class="btn btn-primary mr-2">Update</button>
+						</form>
+						<form th:action="@{/poseidon/ruleName/deleteRuleName}" th:method="delete">
+							<input type="hidden" name="id" th:value="${ruleName.id}"/>
+							<button type="submit" value="Delete" class="btn btn-danger mr-2">Delete</button>
+						</form>
+					</div>
+				</td>
+			</tr>
 			</tbody>
 		</table>
 	</div>

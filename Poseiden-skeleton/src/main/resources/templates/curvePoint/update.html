@@ -1,25 +1,46 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-	  xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8"/>
-<title>Home</title>
-<link rel="stylesheet" href="../../css/bootstrap.min.css" >
+    <meta charset="utf-8"/>
+    <title>Home</title>
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
 </head>
 <body>
-<div class="container">
-	<div class="row">
-		<h2>Update CurvePoint</h2>
-	</div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-md-offset-3">
 
-	<div class="row">
-		<form action="#" th:action="@{/curvePoint/update/{id}(id=${curvePoint.id})}" th:object="${curvePoint}" method="post" class="form-horizontal" style="width: 100%">
-			<!--
-			TODO: Create a form to edit the values of CurvePoint, there are 2 buttons: Update data and Cancel to the Curve Point
-			 -->
-		</form>
-	</div>
-
-</div>
+                <h1>Update Curve</h1>
+                <form th:action="@{/poseidon/curvePoint/updateCurve}" th:object="${curvePointDto}" th:method="put">
+                    <div class="form-group">
+                        <label class="control-label" for="curveId">CurveId</label>
+                        <input id="curveId" class="form-control" type="number" th:value="${curvePointToUpdate.curveId}"
+                               name="curveId" required/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="term">Term</label>
+                        <input id="term" class="form-control" type="number" th:value="${curvePointToUpdate.term}"
+                               name="term" required/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="value">Value</label>
+                        <input id="value" class="form-control" type="number" th:value="${curvePointToUpdate.value}"
+                               name="value" required/>
+                    </div>
+                    <div class="form-group">
+                        <div class="row justify-content-center">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <input type="hidden" name="id" th:value="${curvePointToUpdate.id}"/>
+                                <button type="submit" class="form-control btn btn-primary">
+                                    Update
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

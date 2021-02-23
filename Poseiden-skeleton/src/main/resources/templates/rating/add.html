@@ -1,27 +1,50 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-	  xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8"/>
-<title>Home</title>
-<link rel="stylesheet" href="../../css/bootstrap.min.css" >
+    <meta charset="utf-8"/>
+    <title>Home</title>
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
 </head>
 <body>
-<div class="container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-md-offset-3">
 
-	<div class="row">
-		<h2>Add New Rating</h2>
-	</div>
-
-	<div class="row">
-		<form action="#" th:action="@{/rating/validate}" th:object="${rating}" method="post" class="form-horizontal" style="width: 100%">
-			<!--
-			TODO: Create a form to input the values of Rating, there are 2 buttons: Save data and Cancel to the list Rating
-			 -->
-
-		</form>
-	</div>
-
-</div>
+                <h1>Save Rating</h1>
+                <form th:action="@{/poseidon/rating/saveRating}" th:object="${rating}" th:method="post">
+                    <div class="form-group">
+                        <label class="control-label" for="moodysRating">Moodys rating</label>
+                        <input id="moodysRating" class="form-control" type="text"
+                               name="moodysRating" required autofocus="autofocus"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="sandPRating">SandP rating</label>
+                        <input id="sandPRating" class="form-control" type="text"
+                               name="sandPRating" required/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="fitchRating">Fitch rating</label>
+                        <input id="fitchRating" class="form-control" type="text"
+                               name="fitchRating" required/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="orderNumber">Order number</label>
+                        <input id="orderNumber" class="form-control" type="number"
+                               name="orderNumber" required/>
+                    </div>
+                    <div class="form-group">
+                        <div class="row justify-content-center">
+                            <div class="col-sm-6 col<-sm-offset-3">
+                                <button type="submit" class="form-control btn btn-primary">
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
