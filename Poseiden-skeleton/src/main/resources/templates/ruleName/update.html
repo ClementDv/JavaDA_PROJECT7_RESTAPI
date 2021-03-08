@@ -7,47 +7,63 @@
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6 col-md-offset-3">
 
-                <h1>Update Rule Name</h1>
-                <form th:action="@{/poseidon/ruleName/updateRuleName}" th:object="${ruleNameDto}" th:method="put">
+                <div class="row">
+                    <h1 class="col-10">Update Rule</h1>
+                    <div class="col-2 text-right">
+                        <button type="button" class="close " aria-label="Close">
+                            <a href="/poseidon/ruleName/list" class="text-decoration-none">
+                                <span class="text-right justify-content-end" aria-hidden="true">&times;</span>
+                            </a>
+                        </button>
+
+                    </div>
+                </div>
+
+                <form th:action="@{/poseidon/ruleName/{id}(id=${ruleName.id})}" th:object="${ruleName}" th:method="put">
                     <div class="form-group">
                         <label class="control-label" for="name">Name</label>
-                        <input id="name" class="form-control" type="text" th:value="${ruleNameToUpdate.name}"
-                               name="name" required/>
+                        <input id="name" class="form-control" type="text" th:value="${ruleName.name}"
+                               name="name"/>
+                        <p class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="description">Description</label>
                         <input id="description" class="form-control" type="text"
-                               th:value="${ruleNameToUpdate.description}"
-                               name="description" required/>
+                               th:value="${ruleName.description}"
+                               name="description"/>
+                        <p class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></p>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="json">Json</label>
-                        <input id="json" class="form-control" type="text" th:value="${ruleNameToUpdate.json}"
-                               name="json" required/>
+                        <input id="json" class="form-control" type="text" th:value="${ruleName.json}"
+                               name="json"/>
+                        <p class="text-danger" th:if="${#fields.hasErrors('json')}" th:errors="*{json}"></p>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="template">Template</label>
-                        <input id="template" class="form-control" type="text" th:value="${ruleNameToUpdate.template}"
-                               name="template" required/>
+                        <input id="template" class="form-control" type="text" th:value="${ruleName.template}"
+                               name="template"/>
+                        <p class="text-danger" th:if="${#fields.hasErrors('template')}" th:errors="*{template}"></p>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="sqlStr">Sql</label>
-                        <input id="sqlStr" class="form-control" type="text" th:value="${ruleNameToUpdate.sqlStr}"
-                               name="sqlStr" required/>
+                        <input id="sqlStr" class="form-control" type="text" th:value="${ruleName.sqlStr}"
+                               name="sqlStr"/>
+                        <p class="text-danger" th:if="${#fields.hasErrors('sqlStr')}" th:errors="*{sqlStr}"></p>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="sqlPart">SqlPart</label>
-                        <input id="sqlPart" class="form-control" type="text" th:value="${ruleNameToUpdate.sqlPart}"
-                               name="sqlPart" required/>
+                        <input id="sqlPart" class="form-control" type="text" th:value="${ruleName.sqlPart}"
+                               name="sqlPart"/>
+                        <p class="text-danger" th:if="${#fields.hasErrors('sqlPart')}" th:errors="*{sqlPart}"></p>
                     </div>
                     <div class="form-group">
                         <div class="row justify-content-center">
                             <div class="col-sm-6 col-sm-offset-3">
-                                <input type="hidden" name="id" th:value="${ruleNameToUpdate.id}"/>
                                 <button type="submit" class="form-control btn btn-primary">
                                     Update
                                 </button>

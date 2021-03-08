@@ -20,7 +20,7 @@ import java.sql.Timestamp;
 public class CurvePoint extends AbstractEntity {
 
     @Column(name = "curveId", nullable = false)
-    private int curveId;
+    private Integer curveId;
 
     @Column(name = "asOfDate")
     private Timestamp asOfDate;

@@ -1,13 +1,26 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title> Spring Boot </title>
-    <link rel="stylesheet" href="/css/styles.css"/>
+    <meta charset="utf-8"/>
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
 </head>
 <body>
-<h3> HOME PAGE </h3>
-<p>
-    <a href="/poseidon/login">Login</a> or create one <a href="/poseidon/user/list">User management</a>
-</p>
+    <div class="container">
+        <div class="justify-content-center text-center mt-5">
+            <img src="../static/img/logoP7.png" th:src="@{/img/logoP7.png}"/>
+        </div>
+        <div class="text-center">
+            <p class="btn-group mt-2">
+                <a href="/poseidon/login">
+                    <button type="submit" class="btn btn-primary btn-lg mr-2">Login</button>
+                </a>
+                <a href="/poseidon/register">
+                    <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                </a>
+            </p>
+        </div>
+    </div>
 </body>
 </html>

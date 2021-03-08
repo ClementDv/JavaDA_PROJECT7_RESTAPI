@@ -1,6 +1,7 @@
 package com.nnk.springboot.services.impl;
 
 import com.nnk.springboot.domain.dto.UserDto;
+import com.nnk.springboot.domain.dto.UserUpdateDto;
 import com.nnk.springboot.domain.entity.User;
 import com.nnk.springboot.domain.mapper.CoreMapper;
 import com.nnk.springboot.domain.mapper.UserMapper;

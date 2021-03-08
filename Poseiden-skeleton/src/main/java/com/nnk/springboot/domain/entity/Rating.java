@@ -20,12 +20,12 @@ public class Rating extends AbstractEntity {
     @Column(name = "moodysRating", nullable = false)
     private String moodysRating;
 
-    @Column(name = "sandPRating", nullable = false)
+    @Column(name = "SandPRating", nullable = false)
     private String sandPRating;
 
     @Column(name = "fitchRating", nullable = false)
     private String fitchRating;
 
     @Column(name = "orderNumber", nullable = false)
-    private int orderNumber;
+    private Integer orderNumber;
 }

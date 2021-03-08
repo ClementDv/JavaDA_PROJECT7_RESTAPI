@@ -44,12 +44,10 @@
                     <td th:text="${bid.bidQuantity}"/>
                     <td>
                         <div class="btn-group">
-                            <form th:action="@{/poseidon/bidList/updateBid}" th:method="get">
-                                <input type="hidden" name="id" th:value="${bid.id}"/>
+                            <form th:action="@{/poseidon/bidList/{id}(id=${bid.id})}" th:method="get">
                                 <button type="submit" value="Get" class="btn btn-primary mr-2">Update</button>
                             </form>
-                            <form th:action="@{/poseidon/bidList/deleteBid}" th:method="delete">
-                                <input type="hidden" name="id" th:value="${bid.id}"/>
+                            <form th:action="@{/poseidon/bidList/{id}(id=${bid.id})}" th:method="delete">
                                 <button type="submit" value="Delete" class="btn btn-danger mr-2">Delete</button>
                             </form>
                         </div>

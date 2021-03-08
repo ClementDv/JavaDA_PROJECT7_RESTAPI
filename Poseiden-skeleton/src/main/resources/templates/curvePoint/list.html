@@ -44,12 +44,10 @@
 				<td th:text="${curve.value}"/>
 				<td>
 					<div class="btn-group">
-						<form th:action="@{/poseidon/curvePoint/updateCurve}" th:method="get">
-							<input type="hidden" name="id" th:value="${curve.id}"/>
+						<form th:action="@{/poseidon/curvePoint/{id}(id=${curve.id})}" th:method="get">
 							<button type="submit" value="Get" class="btn btn-primary mr-2">Update</button>
 						</form>
-						<form th:action="@{/poseidon/curvePoint/deleteCurve}" th:method="delete">
-							<input type="hidden" name="id" th:value="${curve.id}"/>
+						<form th:action="@{/poseidon/curvePoint/{id}(id=${curve.id})}" th:method="delete">
 							<button type="submit" value="Delete" class="btn btn-danger mr-2">Delete</button>
 						</form>
 					</div>

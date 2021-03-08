@@ -8,11 +8,22 @@
 </head>
 <body>
 
-    <div class="container">
+    <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6 col-md-offset-3">
 
-                <h1>Login</h1>
+                <div class="row">
+                    <h1 class="col-10">Login</h1>
+                    <div class="col-2 text-right">
+                        <button type="button" class="close " aria-label="Close">
+                            <a href="/poseidon/" class="text-decoration-none">
+                                <span class="text-right justify-content-end" aria-hidden="true">&times;</span>
+                            </a>
+                        </button>
+
+                    </div>
+                </div>
+
                 <form th:action="@{/poseidon/login}" method="post">
 
                     <!-- error message -->
@@ -39,7 +50,7 @@
                                placeholder="Enter Password"/>
                     </div>
 
-                    <div class="form-group" align="center">
+                    <div class="form-group text-center">
                         <div class="row justify-content-center">
                             <div class="col-sm-6 col-sm-offset-3">
                                 <input type="submit" name="login-submit" id="login-submit"

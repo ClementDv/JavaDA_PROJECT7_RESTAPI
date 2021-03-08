@@ -1,7 +1,6 @@
 package com.nnk.springboot.controllers;
 
 import com.nnk.springboot.domain.dto.RatingDto;
-import com.nnk.springboot.domain.entity.Rating;
 import com.nnk.springboot.services.RatingService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,26 +32,35 @@ public class RatingController {
     }
 
     @PostMapping("/rating/saveRating")
-    public String validate(@Valid @ModelAttribute("rating") RatingDto ratingDto) {
-        service.create(ratingDto);
-        return "redirect:/poseidon/rating/list";
+    public String validate(@Valid @ModelAttribute("rating") RatingDto ratingDto, BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            service.create(ratingDto);
+            return "redirect:/poseidon/rating/list";
+        }
+        else {
+            return "rating/add";
+        }
     }
 
-    @GetMapping("/rating/updateRating")
-    public String showUpdateForm(@RequestParam Integer id, Model model) {
-        model.addAttribute("ratingToUpdate", service.read(id));
-        model.addAttribute("ratingDto", new RatingDto());
+    @GetMapping("/rating/{id}")
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+        model.addAttribute("rating", service.read(id));
         return "rating/update";
     }
 
-    @PutMapping("/rating/updateRating")
-    public String updateRating(@RequestParam Integer id, @Valid @ModelAttribute("ratingDto") RatingDto ratingDto) {
-        service.update(id, ratingDto);
-        return "redirect:/poseidon/rating/list";
+    @PutMapping("/rating/{id}")
+    public String updateRating(@Valid @ModelAttribute("rating") RatingDto ratingDto, BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            service.update(ratingDto);
+            return "redirect:/poseidon/rating/list";
+        }
+        else {
+            return "rating/update";
+        }
     }
 
-    @DeleteMapping("/rating/deleteRating")
-    public String deleteRating(@RequestParam Integer id) {
+    @DeleteMapping("/rating/{id}")
+    public String deleteRating(@PathVariable("id") Integer id) {
         service.deleteById(id);
         return "redirect:/poseidon/rating/list";
     }

@@ -7,32 +7,45 @@
     <link rel="stylesheet" href="../../css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6 col-md-offset-3">
 
-                <h1>Update Bid</h1>
-                <form th:action="@{/poseidon/bidList/updateBid}" th:object="${bidListDto}" th:method="put">
+                <div class="row">
+                    <h1 class="col-10">Update Bid</h1>
+                    <div class="col-2 text-right">
+                        <button type="button" class="close " aria-label="Close">
+                            <a href="/poseidon/bidList/list" class="text-decoration-none">
+                                <span class="text-right justify-content-end" aria-hidden="true">&times;</span>
+                            </a>
+                        </button>
+
+                    </div>
+                </div>
+
+                <form th:action="@{/poseidon/bidList/{id}(id=${bidList.id})}" th:object="${bidList}" th:method="put">
                     <div class="form-group">
                         <label class="control-label" for="account">Account</label>
-                        <input id="account" class="form-control" type="text" th:value="${bidListToUpdate.account}"
-                               name="account" required/>
+                        <input id="account" class="form-control" type="text" th:value="${bidList.account}"
+                               name="account"/>
+                        <p class="text-danger" th:if="${#fields.hasErrors('account')}" th:errors="*{account}"></p>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="type">type</label>
-                        <input id="type" class="form-control" type="text" th:value="${bidListToUpdate.type}"
-                               name="type" required/>
+                        <input id="type" class="form-control" type="text" th:value="${bidList.type}"
+                               name="type"/>
+                        <p class="text-danger" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></p>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="bidQuantity">bidQuantity</label>
                         <input id="bidQuantity" class="form-control" type="number" step=".01"
-                               th:value="${bidListToUpdate.bidQuantity}"
-                               name="bidQuantity" required/>
+                               th:value="${bidList.bidQuantity}"
+                               name="bidQuantity"/>
+                        <p class="text-danger" th:if="${#fields.hasErrors('bidQuantity')}" th:errors="*{bidQuantity}"></p>
                     </div>
                     <div class="form-group">
                         <div class="row justify-content-center">
                             <div class="col-sm-6 col-sm-offset-3">
-                                <input type="hidden" name="id" th:value="${bidListToUpdate.id}"/>
                                 <button type="submit" class="form-control btn btn-primary">
                                     Update
                                 </button>

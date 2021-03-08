@@ -8,9 +8,21 @@
 </head>
 <body>
 
-    <div class="container">
+    <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6 col-md-offset-3">
+
+                <div class="row">
+                    <h1 class="col-10">Register</h1>
+                    <div class="col-2 text-right">
+                        <button type="button" class="close " aria-label="Close">
+                            <a href="/poseidon/" class="text-decoration-none">
+                                <span class="text-right justify-content-end" aria-hidden="true">&times;</span>
+                            </a>
+                        </button>
+
+                    </div>
+                </div>
 
                 <!-- success message -->
                 <div th:if="${param.success}">
@@ -24,25 +36,26 @@
                     <div class="alert alert-danger">User already exists !</div>
                 </div>
 
-                <h1>Registration</h1>
-
                 <form th:action="@{/poseidon/register}" method="post" th:object="${user}">
                     <div class="form-group">
                         <label class="control-label" for="fullname">Full Name</label>
                         <input id="fullname" class="form-control" placeholder="Enter Full Name ex : Jean Tur"
-                               th:field="*{fullname}" required autofocus="autofocus"/>
+                               th:field="*{fullname}"/>
+                        <p class="text-danger" th:if="${#fields.hasErrors('fullname')}" th:errors="*{fullname}"></p>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label" for="username"> Username </label> <input
                             id="username" class="form-control" placeholder="Enter Username"
-                            th:field="*{username}" required autofocus="autofocus"/>
+                            th:field="*{username}"/>
+                        <p class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label" for="password"> Password </label> <input
                             id="password" class="form-control" type="password" placeholder="Enter Password"
-                            th:field="*{password}" required autofocus="autofocus"/>
+                            th:field="*{password}"/>
+                        <p class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
                     </div>
 
                     <div class="form-group">

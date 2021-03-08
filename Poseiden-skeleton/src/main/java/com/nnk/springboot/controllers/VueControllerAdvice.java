@@ -14,4 +14,12 @@ public class VueControllerAdvice {
         mav.setViewName("redirect:register?error=userAlreadyExists");
         return mav;
     }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ModelAndView handleEntityNotFoundException(EntityNotFoundException e) {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("403");
+        mav.addObject("errorMsg", e.getMessage());
+        return mav;
+    }
 }

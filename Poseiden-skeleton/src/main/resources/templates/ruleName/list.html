@@ -50,12 +50,10 @@
 				<td th:text="${ruleName.sqlPart}"/>
 				<td>
 					<div class="btn-group">
-						<form th:action="@{/poseidon/ruleName/updateRuleName}" th:method="get">
-							<input type="hidden" name="id" th:value="${ruleName.id}"/>
+						<form th:action="@{/poseidon/ruleName/{id}(id=${ruleName.id})}" th:method="get">
 							<button type="submit" value="Get" class="btn btn-primary mr-2">Update</button>
 						</form>
-						<form th:action="@{/poseidon/ruleName/deleteRuleName}" th:method="delete">
-							<input type="hidden" name="id" th:value="${ruleName.id}"/>
+						<form th:action="@{/poseidon/ruleName/{id}(id=${ruleName.id})}" th:method="delete">
 							<button type="submit" value="Delete" class="btn btn-danger mr-2">Delete</button>
 						</form>
 					</div>

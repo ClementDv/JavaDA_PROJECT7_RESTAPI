@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-      <title>Spring Boot</title>
+    <meta charset="utf-8"/>
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
 </head>
 <body>
-   <h3>Access Denied Exception</h3>
-   <div>
-	    Logged in user: <b th:inline="text"  class="user"> [[${#httpServletRequest.remoteUser}]] </b>
-	    <form th:action="@{/poseidon/logout}" method="POST">
-	         <input type="submit" value="Logout"/>
-	    </form>
-   </div> 	 
-    <p class="error" th:text="${errorMsg}">Error</p>
+    <div class="container">
+        <div class="justify-content-center text-center mt-5">
+            <img src="../static/img/logoP7.png" th:src="@{/img/logoP7.png}"/>
+            <h1>Access Denied Exception</h1>
+            <h3 class="error" th:text="${errorMsg}">Error</h3>
+        </div>
+    </div>
 </body>
 </html>   

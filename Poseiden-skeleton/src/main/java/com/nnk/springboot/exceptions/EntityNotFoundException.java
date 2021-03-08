@@ -1,9 +1,9 @@
 package com.nnk.springboot.exceptions;
 
 public class EntityNotFoundException extends RuntimeException{
-    private final Object entityId;
+    private final Integer entityId;
 
-    public EntityNotFoundException(Object entityId) {
+    public EntityNotFoundException(Integer entityId) {
         super("Invalid entity id: " + entityId);
         this.entityId = entityId;
     }

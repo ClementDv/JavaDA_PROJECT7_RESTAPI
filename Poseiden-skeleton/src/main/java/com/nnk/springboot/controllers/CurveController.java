@@ -22,8 +22,7 @@ public class CurveController {
     }
 
     @RequestMapping("/curvePoint/list")
-    public String home(Model model)
-    {
+    public String home(Model model) {
         model.addAttribute("curveList", service.getList());
         return "curvePoint/list";
     }
@@ -35,27 +34,33 @@ public class CurveController {
     }
 
     @PostMapping("/curvePoint/saveCurve")
-    public String validate(@Valid @ModelAttribute("curvePoint") CurvePointDto curvePointDto) {
-        service.create(curvePointDto);
-        return "redirect:/poseidon/curvePoint/list";
+    public String validate(@Valid @ModelAttribute("curvePoint") CurvePointDto curvePointDto, BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            service.create(curvePointDto);
+            return "redirect:/poseidon/curvePoint/list";
+        } else {
+            return "curvePoint/add";
+        }
     }
 
-    @GetMapping("/curvePoint/updateCurve")
-    public String showUpdateForm(@RequestParam Integer id, Model model) {
-        System.out.println(service.read(id));
-        model.addAttribute("curvePointToUpdate", service.read(id));
-        model.addAttribute("curvePointDto", new CurvePointDto());
+    @GetMapping("/curvePoint/{id}")
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+        model.addAttribute("curvePoint", service.read(id));
         return "curvePoint/update";
     }
 
-    @PutMapping("/curvePoint/updateCurve")
-    public String updateBid(@RequestParam Integer id, @Valid @ModelAttribute("curvePointDto") CurvePointDto curvePointDto) {
-        service.update(id, curvePointDto);
-        return "redirect:/poseidon/curvePoint/list";
+    @PutMapping("/curvePoint/{id}")
+    public String updateBid(@Valid @ModelAttribute("curvePoint") CurvePointDto curvePointDto, BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            service.update(curvePointDto);
+            return "redirect:/poseidon/curvePoint/list";
+        } else {
+            return "curvePoint/update";
+        }
     }
 
-    @DeleteMapping("/curvePoint/deleteCurve")
-    public String deleteBid(@RequestParam Integer id) {
+    @DeleteMapping("/curvePoint/{id}")
+    public String deleteBid(@PathVariable("id") Integer id) {
         service.deleteById(id);
         return "redirect:/poseidon/curvePoint/list";
     }

@@ -1,38 +1,40 @@
 package com.nnk.springboot.controllers;
 
-import com.nnk.springboot.services.AuthenticationService;
 import com.nnk.springboot.domain.dto.UserDto;
+import com.nnk.springboot.services.AuthenticationService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/poseidon/register")
 public class RegisterController {
 
-    private AuthenticationService authenticationService;
+    private final AuthenticationService authenticationService;
 
     public RegisterController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
 
     @GetMapping
-    public ModelAndView showRegisterForm() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("register/registerForm");
-        mav.addObject("user", new UserDto());
-        return mav;
+    public String showRegisterForm(Model model) {
+        model.addAttribute("user", new UserDto());
+        return "register/registerForm";
     }
 
     @PostMapping
-    public ModelAndView registerUser(@ModelAttribute("user") UserDto userDto) {
-        ModelAndView mav = new ModelAndView();
-        authenticationService.registerUser(userDto);
-        mav.setViewName("redirect:register?success");
-        return mav;
+    public String registerUser(@Valid @ModelAttribute("user") UserDto user,
+                               BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            authenticationService.registerUser(user);
+            return "redirect:register?success";
+        }
+        return "register/registerForm";
     }
-
 }

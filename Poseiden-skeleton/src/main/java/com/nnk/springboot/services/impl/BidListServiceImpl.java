@@ -3,7 +3,6 @@ package com.nnk.springboot.services.impl;
 import com.nnk.springboot.domain.dto.BidListDto;
 import com.nnk.springboot.domain.entity.BidList;
 import com.nnk.springboot.domain.mapper.BidListMapper;
-import com.nnk.springboot.domain.mapper.CoreMapper;
 import com.nnk.springboot.repositories.BidListRepository;
 import com.nnk.springboot.services.BidListService;
 import lombok.Getter;

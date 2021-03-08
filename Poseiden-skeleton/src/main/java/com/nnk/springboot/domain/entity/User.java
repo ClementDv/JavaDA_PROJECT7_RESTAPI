@@ -9,6 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Data
 @Accessors(chain = true)
@@ -19,18 +21,14 @@ import javax.validation.constraints.NotBlank;
 public class User extends AbstractEntity {
 
     @Column(name = "username", nullable = false, unique = true)
-    @NotBlank(message = "Username is mandatory")
     private String username;
 
     @Column(name = "password", nullable = false)
-    @NotBlank(message = "Password is mandatory")
     private String password;
 
     @Column(name = "fullname", nullable = false)
-    @NotBlank(message = "FullName is mandatory")
     private String fullname;
 
     @Column(name = "role", nullable = false)
-    @NotBlank(message = "Role is mandatory")
     private String role;
 }

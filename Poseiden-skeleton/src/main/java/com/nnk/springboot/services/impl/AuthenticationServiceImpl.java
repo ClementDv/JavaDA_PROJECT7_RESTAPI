@@ -36,8 +36,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (userRepository.existsByUsername(userDto.getUsername())) {
             throw new UserAlreadyExistsException("Le user " + userDto.getUsername() + " existe déjà!");
         }
+        if (userDto.getRole() == null) {
+            userDto.setRole("USER");
+        }
         User user = userMapper.fromModel(userDto);
-        user.setRole("USER");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return userMapper.toModel(user);

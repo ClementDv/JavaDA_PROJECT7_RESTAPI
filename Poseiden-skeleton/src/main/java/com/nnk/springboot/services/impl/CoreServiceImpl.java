@@ -1,5 +1,6 @@
 package com.nnk.springboot.services.impl;
 
+import com.nnk.springboot.domain.dto.AbstractDto;
 import com.nnk.springboot.domain.entity.AbstractEntity;
 import com.nnk.springboot.domain.mapper.CoreMapper;
 import com.nnk.springboot.exceptions.EntityNotFoundException;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public abstract class CoreServiceImpl<Model, Entity extends AbstractEntity, ID> implements CoreService<Model, Entity, ID> {
+public abstract class CoreServiceImpl<Model extends AbstractDto, Entity extends AbstractEntity, ID> implements CoreService<Model, Entity, ID> {
 
     protected abstract <Repository extends JpaRepository<Entity, ID>> Repository getRepository();
 
@@ -27,8 +28,14 @@ public abstract class CoreServiceImpl<Model, Entity extends AbstractEntity, ID> 
 
     @Override
     public Model read(ID id){
-        Entity entity = getRepository().getOne(id);
-        return getMapper().toModel(entity);
+        try {
+            Entity entity = getRepository().getOne(id);
+            return getMapper().toModel(entity);
+        }
+        catch (javax.persistence.EntityNotFoundException e)
+        {
+            throw new EntityNotFoundException((Integer) id);
+        }
     }
 
     @Override
@@ -39,8 +46,8 @@ public abstract class CoreServiceImpl<Model, Entity extends AbstractEntity, ID> 
     }
 
     @Override
-    public Model update(ID id, Model model) {
-        Entity entity = getRepository().getOne(id);
+    public Model update(Model model) {
+        Entity entity = getRepository().getOne((ID) model.getId());
         getMapper().fromModel(entity, model);
         getRepository().save(entity);
         return getMapper().toModel(entity);
@@ -130,7 +137,9 @@ public abstract class CoreServiceImpl<Model, Entity extends AbstractEntity, ID> 
 
     @Override
     public void deleteById(ID var1) {
-        getRepository().deleteById(var1);
+        if (var1 != null) {
+            getRepository().deleteById(var1);
+        }
     }
 
     @Override

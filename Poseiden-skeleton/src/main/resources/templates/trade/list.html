@@ -44,12 +44,10 @@
                     <td th:text="${trade.buyQuantity}"/>
                     <td>
                         <div class="btn-group">
-                            <form th:action="@{/poseidon/trade/updateTrade}" th:method="get">
-                                <input type="hidden" name="id" th:value="${trade.id}"/>
+                            <form th:action="@{/poseidon/trade/{id}(id=${trade.id})}" th:method="get">
                                 <button type="submit" value="Get" class="btn btn-primary mr-2">Update</button>
                             </form>
-                            <form th:action="@{/poseidon/trade/deleteTrade}" th:method="delete">
-                                <input type="hidden" name="id" th:value="${trade.id}"/>
+                            <form th:action="@{/poseidon/trade/{id}(id=${trade.id})}" th:method="delete">
                                 <button type="submit" value="Delete" class="btn btn-danger mr-2">Delete</button>
                             </form>
                         </div>

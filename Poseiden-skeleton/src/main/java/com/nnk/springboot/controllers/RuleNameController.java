@@ -35,26 +35,36 @@ public class RuleNameController {
     }
 
     @PostMapping("/ruleName/saveRuleName")
-    public String validate(@Valid @ModelAttribute("ruleName") RuleNameDto ruleNameDto) {
-        service.create(ruleNameDto);
-        return "redirect:/poseidon/ruleName/list";
+    public String validate(@Valid @ModelAttribute("ruleName") RuleNameDto ruleNameDto, BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            service.create(ruleNameDto);
+            return "redirect:/poseidon/ruleName/list";
+        }
+        else {
+            return "ruleName/add";
+        }
     }
 
-    @GetMapping("/ruleName/updateRuleName")
-    public String showUpdateForm(@RequestParam Integer id, Model model) {
-        model.addAttribute("ruleNameToUpdate", service.read(id));
-        model.addAttribute("ruleNameDto", new BidListDto());
+    @GetMapping("/ruleName/{id}")
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+        model.addAttribute("ruleName", service.read(id));
         return "ruleName/update";
     }
 
-    @PutMapping("/ruleName/updateRuleName")
-    public String updateRuleName(@RequestParam Integer id, @Valid @ModelAttribute("ruleNameDto") RuleNameDto ruleNameDto) {
-        service.update(id, ruleNameDto);
-        return "redirect:/poseidon/ruleName/list";
+    @PutMapping("/ruleName/{id}")
+    public String updateRuleName(@Valid @ModelAttribute("ruleName") RuleNameDto ruleNameDto,
+                                 BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            service.update(ruleNameDto);
+            return "redirect:/poseidon/ruleName/list";
+        }
+        else {
+            return "ruleName/update";
+        }
     }
 
-    @DeleteMapping("/ruleName/deleteRuleName")
-    public String deleteRuleName(@RequestParam Integer id) {
+    @DeleteMapping("/ruleName/{id}")
+    public String deleteRuleName(@PathVariable("id") Integer id) {
         service.deleteById(id);
         return "redirect:/poseidon/ruleName/list";
     }

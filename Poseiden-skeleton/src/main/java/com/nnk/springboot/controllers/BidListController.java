@@ -19,11 +19,8 @@ import java.util.stream.Collectors;
 public class BidListController {
     private final BidListService service;
 
-    private BidListMapper bidListMapper;
-
-    public BidListController(BidListService service, BidListMapper bidListMapper) {
+    public BidListController(BidListService service) {
         this.service = service;
-        this.bidListMapper = bidListMapper;
     }
 
     @RequestMapping("/bidList/list")
@@ -39,27 +36,33 @@ public class BidListController {
     }
 
     @PostMapping("/bidList/saveBid")
-    public String validate(@ModelAttribute("bidList") @Valid BidListDto bidListDto) {
-        service.create(bidListDto);
-        return "redirect:/poseidon/bidList/list";
+    public String validate(@Valid @ModelAttribute("bidList") BidListDto bidListDto, BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            service.create(bidListDto);
+            return "redirect:/poseidon/bidList/list";
+        } else {
+            return "bidList/add";
+        }
     }
 
-    @GetMapping("/bidList/updateBid")
-    public String showUpdateForm(@RequestParam Integer id, Model model) {
-        model.addAttribute("bidListToUpdate",
-                service.read(id));
-        model.addAttribute("bidListDto", new BidListDto());
+    @GetMapping("/bidList/{id}")
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+        model.addAttribute("bidList", service.read(id));
         return "bidList/update";
     }
 
-    @PutMapping("/bidList/updateBid")
-    public String updateBid(@RequestParam Integer id, @Valid @ModelAttribute BidListDto bidListDto) {
-        service.update(id, bidListDto);
-        return "redirect:/poseidon/bidList/list";
+    @PutMapping("/bidList/{id}")
+    public String updateBid(@Valid @ModelAttribute("bidList") BidListDto bidListDto, BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            service.update(bidListDto);
+            return "redirect:/poseidon/bidList/list";
+        } else {
+            return "bidList/update";
+        }
     }
 
-    @DeleteMapping("/bidList/deleteBid")
-    public String deleteBid(@RequestParam Integer id) {
+    @DeleteMapping("/bidList/{id}")
+    public String deleteBid(@PathVariable("id") Integer id) {
         service.deleteById(id);
         return "redirect:/poseidon/bidList/list";
     }
