@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -14,7 +15,7 @@ import java.sql.Timestamp;
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-@AllArgsConstructor
+@SuperBuilder
 @NoArgsConstructor
 public class CurvePointDto extends AbstractDto {
 
@@ -31,6 +32,7 @@ public class CurvePointDto extends AbstractDto {
     @Positive(message = "Value must be positive")
     @NotNull(message = "Value is mandatory")
     private Double value;
+
     private Timestamp creationDate;
 }
 

@@ -21,4 +21,9 @@ public class TradeServiceImpl extends CoreServiceImpl<TradeDto, Trade, Integer> 
 
     private final @Getter
     TradeMapper mapper;
+
+    @Override
+    protected String getName() {
+        return "Trade";
+    }
 }

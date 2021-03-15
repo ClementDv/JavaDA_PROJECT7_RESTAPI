@@ -35,7 +35,7 @@ public class BidListController {
         return "bidList/add";
     }
 
-    @PostMapping("/bidList/saveBid")
+    @PostMapping("/bidList/save")
     public String validate(@Valid @ModelAttribute("bidList") BidListDto bidListDto, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
             service.create(bidListDto);

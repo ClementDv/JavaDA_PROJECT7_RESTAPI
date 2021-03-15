@@ -33,7 +33,7 @@ public class CurveController {
         return "curvePoint/add";
     }
 
-    @PostMapping("/curvePoint/saveCurve")
+    @PostMapping("/curvePoint/save")
     public String validate(@Valid @ModelAttribute("curvePoint") CurvePointDto curvePointDto, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
             service.create(curvePointDto);

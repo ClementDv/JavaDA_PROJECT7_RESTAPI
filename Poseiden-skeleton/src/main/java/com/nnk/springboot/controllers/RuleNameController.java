@@ -34,7 +34,7 @@ public class RuleNameController {
         return "ruleName/add";
     }
 
-    @PostMapping("/ruleName/saveRuleName")
+    @PostMapping("/ruleName/save")
     public String validate(@Valid @ModelAttribute("ruleName") RuleNameDto ruleNameDto, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
             service.create(ruleNameDto);

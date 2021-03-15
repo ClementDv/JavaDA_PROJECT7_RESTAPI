@@ -21,4 +21,9 @@ public class RatingServiceImpl extends CoreServiceImpl<RatingDto, Rating, Intege
 
     private final @Getter
     RatingMapper mapper;
+
+    @Override
+    protected String getName() {
+        return "Rating";
+    }
 }

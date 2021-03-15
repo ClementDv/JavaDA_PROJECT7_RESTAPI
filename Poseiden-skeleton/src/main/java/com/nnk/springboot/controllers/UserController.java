@@ -34,7 +34,6 @@ public class UserController {
 
     @RequestMapping("/user/list")
     public String home(Model model) {
-        System.out.println(userService.findAll());
         model.addAttribute("userList", userService.getList());
         return "user/list";
     }

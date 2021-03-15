@@ -31,7 +31,7 @@ public class RatingController {
         return "rating/add";
     }
 
-    @PostMapping("/rating/saveRating")
+    @PostMapping("/rating/save")
     public String validate(@Valid @ModelAttribute("rating") RatingDto ratingDto, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
             service.create(ratingDto);

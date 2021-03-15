@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.Column;
@@ -14,8 +15,9 @@ import java.sql.Timestamp;
 
 @Data
 @Accessors(chain = true)
-@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@SuperBuilder
 @Entity
 @Table(name = "trade")
 public class Trade extends AbstractEntity {
@@ -81,3 +83,4 @@ public class Trade extends AbstractEntity {
     @Column(name = "side")
     private String side;
 }
+

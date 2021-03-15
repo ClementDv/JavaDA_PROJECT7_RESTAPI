@@ -5,6 +5,7 @@ import com.nnk.springboot.domain.entity.User;
 import com.nnk.springboot.domain.mapper.UserMapper;
 import com.nnk.springboot.exceptions.UserAlreadyExistsException;
 import com.nnk.springboot.repositories.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,6 +18,7 @@ import java.util.Collections;
 
 @Service
 @Transactional
+@Slf4j
 public class AuthenticationServiceImpl implements AuthenticationService {
 
     private BCryptPasswordEncoder passwordEncoder;
@@ -34,6 +36,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public UserDto registerUser(UserDto userDto) {
         if (userRepository.existsByUsername(userDto.getUsername())) {
+            log.error("");
             throw new UserAlreadyExistsException("Le user " + userDto.getUsername() + " existe déjà!");
         }
         if (userDto.getRole() == null) {
@@ -41,7 +44,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
         User user = userMapper.fromModel(userDto);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+        user = userRepository.save(user);
+        log.info("AuthenticationService: User " + user.getUsername() + " register");
         return userMapper.toModel(user);
     }
 
@@ -51,6 +55,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }
+        log.info("AuthenticationService: User " + username + " logged");
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
                 user.getPassword(),

@@ -21,4 +21,9 @@ public class RuleNameServiceImpl extends CoreServiceImpl<RuleNameDto, RuleName, 
 
     private final @Getter
     RuleNameMapper mapper;
+
+    @Override
+    protected String getName() {
+        return "RuleName";
+    }
 }

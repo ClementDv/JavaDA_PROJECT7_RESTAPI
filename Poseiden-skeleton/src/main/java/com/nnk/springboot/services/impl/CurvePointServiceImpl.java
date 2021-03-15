@@ -21,4 +21,9 @@ public class CurvePointServiceImpl extends CoreServiceImpl<CurvePointDto, CurveP
 
     private final @Getter
     CurvePointMapper mapper;
+
+    @Override
+    protected String getName() {
+        return "CurvePoint";
+    }
 }

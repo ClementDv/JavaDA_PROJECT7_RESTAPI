@@ -23,4 +23,9 @@ public class UserServiceImpl extends CoreServiceImpl<UserDto, User, Integer> imp
 
     private final @Getter
     UserMapper mapper;
+
+    @Override
+    protected String getName() {
+        return "User";
+    }
 }

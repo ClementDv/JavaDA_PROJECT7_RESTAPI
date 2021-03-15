@@ -32,7 +32,7 @@ public class TradeController {
         return "trade/add";
     }
 
-    @PostMapping("/trade/saveTrade")
+    @PostMapping("/trade/save")
     public String validate(@Valid @ModelAttribute("trade") TradeDto tradeDto, BindingResult bindingResult) {
         if (!bindingResult.hasErrors()) {
             service.create(tradeDto);

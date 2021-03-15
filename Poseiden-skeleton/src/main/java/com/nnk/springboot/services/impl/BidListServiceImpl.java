@@ -15,9 +15,16 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 public class BidListServiceImpl extends CoreServiceImpl<BidListDto, BidList, Integer> implements BidListService {
+
     private final @Getter
     BidListRepository repository;
 
     private final @Getter
     BidListMapper mapper;
+
+
+    @Override
+    protected String getName() {
+        return "BidList";
+    }
 }
