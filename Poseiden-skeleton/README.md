@@ -1,31 +1,36 @@
-# spring-boot
-## Technical:
+<p align="center">
+  <img src="https://github.com/ClementDv/OpCl-JAVA-P7/blob/master/Poseiden-skeleton/src/main/resources/static/img/logoP7.png?raw=true" alt="Logo"/>
+</p>
 
-1. Framework: Spring Boot v2.0.4
-2. Java 8
-3. Thymeleaf
-4. Bootstrap v.4.3.1
+# OpCl-JAVA-P7
 
+A financial stock Application. The project goal is to resume a project and make it functional.
+The project works with Thymeleaf we could be able to create / update and delete kinds of model.
 
-## Setup with Intellij IDE
-1. Create project from Initializr: File > New > project > Spring Initializr
-2. Add lib repository into pom.xml
-3. Add folders
-    - Source root: src/main/java
-    - View: src/main/resources
-    - Static: src/main/resource/static
-4. Create database with name "demo" as configuration in application.properties
-5. Run sql script to create table doc/data.sql
+## Prerequisites
 
-## Implement a Feature
-1. Create mapping domain class and place in package com.nnk.springboot.domain
-2. Create repository class and place in package com.nnk.springboot.repositories
-3. Create controller class and place in package com.nnk.springboot.controllers
-4. Create view files and place in src/main/resource/templates
+1. Java version 14
+2. Maven 3.6.3
+3. Mysql 8.0.23
 
-## Write Unit Test
-1. Create unit test and place in package com.nnk.springboot in folder test > java
+# Run Application
 
-## Security
-1. Create user service to load user from  database and place in package com.nnk.springboot.services
-2. Add configuration class and place in package com.nnk.springboot.config
+Package app :
+*In main folder use the following command*
+```
+mvn package
+```
+
+Launch App:
+```
+ java -jar target/poseidon-0.0.1-SNAPSHOT.jar
+```
+
+Test app:
+```
+ mvn verify
+```
+---------------------------------------
+*Thank You.  
+CLemDv*
+
